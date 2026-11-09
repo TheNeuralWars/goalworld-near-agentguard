@@ -5,3 +5,5 @@ node_modules/
 *.log
 .DS_Store
 .tmp/
+evidence/testnet.env
+**/*.fc.json

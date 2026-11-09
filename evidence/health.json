@@ -1,8 +1,10 @@
 {
   "ok": true,
   "service": "goalworld-near-agentguard",
-  "mode": "mock",
+  "mode": "testnet",
   "network": "testnet",
+  "rpc": "https://rpc.testnet.near.org",
+  "agent_account": "gwagent894bd1e3.testnet",
   "tracks": [
     "agents",
     "security"
@@ -21,13 +23,17 @@
   },
   "key": {
     "type": "function_call",
-    "receiver_id": "intents.near",
+    "account_id": "gwagent894bd1e3.testnet",
+    "receiver_id": "wrap.near",
     "method_names": [
-      "quote",
-      "execute"
+      "ft_transfer",
+      "storage_deposit",
+      "near_deposit"
     ],
-    "can_transfer_near": false
+    "can_transfer_near": false,
+    "public_key": "ed25519:2hPfLZTYfwCVBidoKdMAtihvZ1SEfpF1XS5EF85VMfcT"
   },
-  "honesty": "MOCK Intents dry-run — no mainnet tx; payout .near not invented",
+  "omni": true,
+  "honesty": "Testnet + dry 1Click — no mainnet; no fabricated prices",
   "hackathon": "NEAR HACKATHON 2026"
 }

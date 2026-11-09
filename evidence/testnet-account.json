@@ -1,0 +1,16 @@
+{
+  "network": "testnet",
+  "account_id": "gwagent894bd1e3.testnet",
+  "explorer_account": "https://testnet.nearblocks.io/address/gwagent894bd1e3.testnet",
+  "explorer_add_key_tx": "https://testnet.nearblocks.io/txns/6kBauEmipF5yXPXUv8vQvj8jjsDGVrpDQguMrGux67Wo",
+  "add_key_hash": "6kBauEmipF5yXPXUv8vQvj8jjsDGVrpDQguMrGux67Wo",
+  "fc_public_key": "ed25519:2hPfLZTYfwCVBidoKdMAtihvZ1SEfpF1XS5EF85VMfcT",
+  "fc_receiver": "wrap.near",
+  "transfer_with_fc_key": {
+    "refused": true,
+    "error": "The transaction contains more then one action, but it was signed with an access key which allows transaction to apply only one specific action. To apply more then one actions TX must be signed with a full access key",
+    "hash": null,
+    "note": "Expected: FC key cannot Transfer"
+  },
+  "created_at": "2026-11-09T18:15:37.882Z"
+}

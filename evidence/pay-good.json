@@ -1,100 +1,96 @@
 {
-  "verdict": "PASS_MOCK",
-  "reason": "mock_settled",
+  "verdict": "PASS",
+  "reason": "ok",
   "receipt": {
-    "id": "mock-intent-1794247016418",
-    "status": "mock_settled",
-    "amount_near": 0.25,
+    "id": "guard-1794248693723",
+    "status": "policy_pass_no_price",
+    "amount_near": 0.2,
     "token": "NEAR",
-    "received": {
-      "token": "USDC",
-      "amount": 0.2495
-    },
-    "fee": {
-      "bps": 20,
-      "amount": 0.0005,
-      "token": "NEAR"
-    },
-    "explorer": null,
-    "ts": "2026-11-09T17:56:56.418Z"
+    "payee": "gwagent894bd1e3.testnet",
+    "quote": null,
+    "price": null,
+    "ts": "2026-11-09T18:24:53.723Z",
+    "note": "No mainnet exec. Dry 1Click quote only when ok."
   },
   "counterparty": {
     "decision": "allow",
-    "score": 100,
+    "score": 70,
     "reasons": [
-      "known allow / protocol account",
-      "named mainnet-style account",
-      "prior interactions=3"
+      "view_account ok",
+      "nonzero balance",
+      "no prior-interaction signal supplied"
     ],
-    "account_id": "intents.near"
+    "onchain": {
+      "ok": true,
+      "account_id": "gwagent894bd1e3.testnet",
+      "amount": "9999957928787285800000000",
+      "locked": "0",
+      "storage_usage": 348,
+      "code_hash": "11111111111111111111111111111111",
+      "block_height": 276956548,
+      "exists": true
+    },
+    "account_id": "gwagent894bd1e3.testnet"
   },
   "spend": {
     "ok": true,
     "decision": "allow",
     "reason": "within caps",
+    "code": "ok",
     "remaining": 5
   },
   "quote": {
-    "mode": "mock",
+    "ok": false,
     "dry": true,
-    "route": "near-intents",
-    "from": {
-      "token": "NEAR",
-      "amount": 0.25
-    },
-    "to": {
-      "token": "USDC",
-      "amount": 0.2495
-    },
-    "fee": {
-      "bps": 20,
-      "amount": 0.0005,
-      "token": "NEAR"
-    },
-    "note": "DRY quote only — no mainnet tx. Intents has no testnet (Q-007)."
+    "mode": "1click",
+    "reason": "Internal server error",
+    "quote": null,
+    "price": null,
+    "raw": {
+      "message": "Internal server error",
+      "correlationId": "0bceee54-529c-410f-8946-c9ebce1ed8c3",
+      "timestamp": "2026-11-09T18:24:53.676Z",
+      "path": "/v0/quote"
+    }
   },
   "key": {
     "type": "function_call",
-    "receiver_id": "intents.near",
+    "account_id": "gwagent894bd1e3.testnet",
+    "receiver_id": "wrap.near",
     "method_names": [
-      "quote",
-      "execute"
+      "ft_transfer",
+      "storage_deposit",
+      "near_deposit"
     ],
     "can_transfer_near": false,
+    "public_key": "ed25519:2hPfLZTYfwCVBidoKdMAtihvZ1SEfpF1XS5EF85VMfcT",
     "notes": [
-      "FC key is scoped to one receiver contract + method allowlist.",
-      "Cannot transfer native NEAR or rotate keys — human holds full-access.",
-      "If gas allowance hits zero the agent locks itself out until human tops up."
+      "FC key scoped to one receiver + method allowlist.",
+      "Cannot Transfer native NEAR or AddKey — proven on testnet in evidence/.",
+      "Gas allowance exhaustion locks the agent until human tops up."
     ]
   },
   "budget": {
     "day": "2026-11-09",
     "per_tx_near": 1,
     "daily_near": 5,
-    "spent_near": 0.25,
-    "remaining_near": 4.75,
+    "spent_near": 0.2,
+    "remaining_near": 4.8,
     "allow_tokens": [
       "NEAR",
       "USDC"
     ],
     "receipts": [
       {
-        "id": "mock-intent-1794247016418",
-        "status": "mock_settled",
-        "amount_near": 0.25,
+        "id": "guard-1794248693723",
+        "status": "policy_pass_no_price",
+        "amount_near": 0.2,
         "token": "NEAR",
-        "received": {
-          "token": "USDC",
-          "amount": 0.2495
-        },
-        "fee": {
-          "bps": 20,
-          "amount": 0.0005,
-          "token": "NEAR"
-        },
-        "explorer": null,
-        "ts": "2026-11-09T17:56:56.418Z",
-        "payee": "intents.near"
+        "payee": "gwagent894bd1e3.testnet",
+        "quote": null,
+        "price": null,
+        "ts": "2026-11-09T18:24:53.723Z",
+        "note": "No mainnet exec. Dry 1Click quote only when ok."
       }
     ]
   },
@@ -103,38 +99,44 @@
       "step": 1,
       "kind": "counterparty",
       "status": "allow",
-      "detail": "intents.near score=100",
+      "detail": "gwagent894bd1e3.testnet score=70",
       "reasons": [
-        "known allow / protocol account",
-        "named mainnet-style account",
-        "prior interactions=3"
-      ]
+        "view_account ok",
+        "nonzero balance",
+        "no prior-interaction signal supplied"
+      ],
+      "onchain": {
+        "exists": true,
+        "amount": "9999957928787285800000000",
+        "block_height": 276956548
+      }
     },
     {
       "step": 2,
       "kind": "spend_policy",
       "status": "allow",
-      "detail": "within caps"
+      "detail": "within caps",
+      "code": "ok"
     },
     {
       "step": 3,
       "kind": "fc_key",
       "status": "ok",
-      "detail": "scoped to intents.near"
+      "detail": "scoped to wrap.near"
     },
     {
       "step": 4,
       "kind": "intent_quote",
-      "status": "ok",
-      "detail": "dry quote fee 20bps"
+      "status": "no_price",
+      "detail": "Internal server error"
     },
     {
       "step": 5,
-      "kind": "intent_execute",
-      "status": "mock_settled",
-      "detail": "dry mock settlement"
+      "kind": "receipt",
+      "status": "policy_pass_no_price",
+      "detail": "guard-1794248693723"
     }
   ],
-  "ms": 0,
-  "honesty": "MOCK Intents dry-run — no mainnet tx, no wallet created"
+  "ms": 3538,
+  "honesty": "Testnet RPC + dry 1Click when available — no mainnet tx, no fabricated prices"
 }
