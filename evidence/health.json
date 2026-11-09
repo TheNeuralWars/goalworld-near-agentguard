@@ -1,0 +1,33 @@
+{
+  "ok": true,
+  "service": "goalworld-near-agentguard",
+  "mode": "mock",
+  "network": "testnet",
+  "tracks": [
+    "agents",
+    "security"
+  ],
+  "budget": {
+    "day": "2026-11-09",
+    "per_tx_near": 1,
+    "daily_near": 5,
+    "spent_near": 0,
+    "remaining_near": 5,
+    "allow_tokens": [
+      "NEAR",
+      "USDC"
+    ],
+    "receipts": []
+  },
+  "key": {
+    "type": "function_call",
+    "receiver_id": "intents.near",
+    "method_names": [
+      "quote",
+      "execute"
+    ],
+    "can_transfer_near": false
+  },
+  "honesty": "MOCK Intents dry-run — no mainnet tx; payout .near not invented",
+  "hackathon": "NEAR HACKATHON 2026"
+}

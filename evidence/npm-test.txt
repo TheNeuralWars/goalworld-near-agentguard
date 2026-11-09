@@ -1,0 +1,126 @@
+
+> goalworld-near-agentguard@0.1.0 test
+> node --test test/*.test.js
+
+TAP version 13
+# Subtest: agent
+    # Subtest: PASS_MOCK happy path dry intent
+    ok 1 - PASS_MOCK happy path dry intent
+      ---
+      duration_ms: 2.171763
+      type: 'test'
+      ...
+    # Subtest: blocks blocklisted payee (attack demo)
+    ok 2 - blocks blocklisted payee (attack demo)
+      ---
+      duration_ms: 9.258975
+      type: 'test'
+      ...
+    # Subtest: blocks overspend
+    ok 3 - blocks overspend
+      ---
+      duration_ms: 0.357601
+      type: 'test'
+      ...
+    # Subtest: warn path needs human
+    ok 4 - warn path needs human
+      ---
+      duration_ms: 1.600043
+      type: 'test'
+      ...
+    1..4
+ok 1 - agent
+  ---
+  duration_ms: 30.806251
+  type: 'suite'
+  ...
+# Subtest: fc keys
+    # Subtest: cannot transfer NEAR
+    ok 1 - cannot transfer NEAR
+      ---
+      duration_ms: 1.467403
+      type: 'test'
+      ...
+    # Subtest: signs only allowlisted method on receiver
+    ok 2 - signs only allowlisted method on receiver
+      ---
+      duration_ms: 0.29616
+      type: 'test'
+      ...
+    1..2
+ok 2 - fc keys
+  ---
+  duration_ms: 14.473024
+  type: 'suite'
+  ...
+# Subtest: spend policy
+    # Subtest: allows under caps
+    ok 1 - allows under caps
+      ---
+      duration_ms: 1.660563
+      type: 'test'
+      ...
+    # Subtest: blocks over per-tx
+    ok 2 - blocks over per-tx
+      ---
+      duration_ms: 0.324
+      type: 'test'
+      ...
+    # Subtest: blocks unknown token
+    ok 3 - blocks unknown token
+      ---
+      duration_ms: 12.697901
+      type: 'test'
+      ...
+    # Subtest: blocks when daily exhausted
+    ok 4 - blocks when daily exhausted
+      ---
+      duration_ms: 0.33316
+      type: 'test'
+      ...
+    1..4
+ok 3 - spend policy
+  ---
+  duration_ms: 35.641219
+  type: 'suite'
+  ...
+# Subtest: server
+    # Subtest: health
+    ok 1 - health
+      ---
+      duration_ms: 160.891828
+      type: 'test'
+      ...
+    # Subtest: pay good
+    ok 2 - pay good
+      ---
+      duration_ms: 60.759382
+      type: 'test'
+      ...
+    # Subtest: pay attack
+    ok 3 - pay attack
+      ---
+      duration_ms: 46.452077
+      type: 'test'
+      ...
+    # Subtest: ui
+    ok 4 - ui
+      ---
+      duration_ms: 26.874805
+      type: 'test'
+      ...
+    1..4
+ok 4 - server
+  ---
+  duration_ms: 296.136974
+  type: 'suite'
+  ...
+1..4
+# tests 14
+# suites 4
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2118.806049

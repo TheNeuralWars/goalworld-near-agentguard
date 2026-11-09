@@ -1,0 +1,74 @@
+{
+  "verdict": "BLOCKED",
+  "reason": "counterparty_block",
+  "receipt": null,
+  "counterparty": {
+    "decision": "block",
+    "score": 0,
+    "reasons": [
+      "shared blocklist hit",
+      "known-bad demo address"
+    ]
+  },
+  "spend": null,
+  "quote": null,
+  "key": {
+    "type": "function_call",
+    "receiver_id": "intents.near",
+    "method_names": [
+      "quote",
+      "execute"
+    ],
+    "can_transfer_near": false,
+    "notes": [
+      "FC key is scoped to one receiver contract + method allowlist.",
+      "Cannot transfer native NEAR or rotate keys — human holds full-access.",
+      "If gas allowance hits zero the agent locks itself out until human tops up."
+    ]
+  },
+  "budget": {
+    "day": "2026-11-09",
+    "per_tx_near": 1,
+    "daily_near": 5,
+    "spent_near": 0.25,
+    "remaining_near": 4.75,
+    "allow_tokens": [
+      "NEAR",
+      "USDC"
+    ],
+    "receipts": [
+      {
+        "id": "mock-intent-1794247016418",
+        "status": "mock_settled",
+        "amount_near": 0.25,
+        "token": "NEAR",
+        "received": {
+          "token": "USDC",
+          "amount": 0.2495
+        },
+        "fee": {
+          "bps": 20,
+          "amount": 0.0005,
+          "token": "NEAR"
+        },
+        "explorer": null,
+        "ts": "2026-11-09T17:56:56.418Z",
+        "payee": "intents.near"
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "step": 1,
+      "kind": "counterparty",
+      "status": "block",
+      "detail": "scam.near score=0",
+      "reasons": [
+        "shared blocklist hit",
+        "known-bad demo address"
+      ]
+    }
+  ],
+  "ms": 0,
+  "honesty": "MOCK Intents dry-run — no mainnet tx, no wallet created"
+}

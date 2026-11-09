@@ -1,0 +1,13 @@
+{
+  "name": "goalworld-near-agentguard",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "GoalWorld AgentGuard on NEAR — spend limits, function-call keys, mock Intents settlement for NEAR HACKATHON (agents + security).",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "demo": "node scripts/demo.js"
+  },
+  "engines": { "node": ">=20" }
+}

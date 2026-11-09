@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AgentGuard · NEAR · GoalWorld</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="top">
+    <div class="brand">
+      <svg class="hex" viewBox="0 0 34 38" fill="none" aria-hidden="true"><path d="M17 1.5L32 10v18L17 36.5 2 28V10L17 1.5Z" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="19" r="5" stroke="currentColor" stroke-width="1.6"/></svg>
+      <div>
+        <div class="brand-name">AgentGuard</div>
+        <div class="brand-sub">GoalWorld · NEAR agents + security</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-mock" id="badge-mode">MOCK INTENTS</span>
+      <span class="badge badge-sb" id="badge-budget">BUDGET …</span>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <p class="kicker">NEAR HACKATHON · tracks agents + security</p>
+      <h1>Give agents money without the <em>keys to everything</em></h1>
+      <p class="lede">Hermes agents spend under human policy: <strong>function-call keys</strong>, spend caps, counterparty checks, then a <strong>dry NEAR Intents</strong> quote. Full-access stays with the human.</p>
+    </section>
+    <section class="console">
+      <div class="demos">
+        <button class="demo demo-good" data-demo="good" type="button">
+          <span class="demo-tag">01 · ALLOW</span>
+          <span class="demo-title">Dry Intent pay</span>
+          <span class="demo-desc">FC key → quote → mock settle</span>
+        </button>
+        <button class="demo demo-bad" data-demo="cap" type="button">
+          <span class="demo-tag">02 · CAP</span>
+          <span class="demo-title">Over daily/per-tx</span>
+          <span class="demo-desc">Policy blocks before signing</span>
+        </button>
+        <button class="demo demo-escape" data-demo="attack" type="button">
+          <span class="demo-tag">03 · ATTACK</span>
+          <span class="demo-title">Pay scam.near</span>
+          <span class="demo-desc">Injected agent stopped cold</span>
+        </button>
+      </div>
+      <label class="label" for="payee">Payee</label>
+      <textarea id="payee" rows="1" style="min-height:48px">intents.near</textarea>
+      <label class="label" for="amount" style="margin-top:12px">Amount (NEAR)</label>
+      <textarea id="amount" rows="1" style="min-height:48px">0.25</textarea>
+      <div class="run-row">
+        <span class="hint">MOCK dry-run · no mainnet tx · payout <code>.near</code> not invented</span>
+        <button class="run" id="run" type="button">Run guard</button>
+      </div>
+    </section>
+    <section class="results" id="results" hidden>
+      <div class="verdict-row">
+        <div class="verdict" id="verdict">—</div>
+        <div class="verdict-meta" id="verdict-meta"></div>
+      </div>
+      <div class="grid">
+        <div class="panel">
+          <h2>FC key + Intent</h2>
+          <div class="stats" id="stats"></div>
+          <p class="scope" id="reply"></p>
+        </div>
+        <div class="panel">
+          <h2>Caps <span class="sub">remaining</span></h2>
+          <div id="budget-panel"></div>
+        </div>
+      </div>
+      <div class="panel"><h2>Timeline</h2><ul class="timeline" id="timeline"></ul></div>
+    </section>
+  </main>
+  <footer>
+    <p>NEAR HACKATHON · tracks <code>agents</code> + <code>security</code> · patterns inspired by GoalChain AgentPay (untouched) · no wallet / mainnet in this pack</p>
+  </footer>
+  <script src="/app.js"></script>
+</body>
+</html>
