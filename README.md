@@ -1,43 +1,57 @@
-# AgentGuard — GoalWorld on NEAR (testnet)
+# GoalWorld AgentGuard — NEAR HACKATHON
 
-**Hackathon:** [NEAR HACKATHON](https://nearhackathon.com/) · deadline 2026-11-14 23:59 UTC (**15 Nov 00:59 Rome**)  
-**Tracks:** `agents` + `security`  
-**Network:** **testnet only** (free). Mainnet payout `.near` = Nico later (placeholder below).
+**Tracks:** `security` (+ `agents`)  
+**Network split:** agent + spend_cap contract on **NEAR testnet**; 1Click intent quotes use **mainnet `dry:true`** (no funds).  
+**Mainnet payout (form):** `b87adcdee86dfb5a0fa5995a99b7bc6c54a0956a4969719c01107e7bc1de7df9` (64-hex implicit; form allows named `*.near` **or** implicit — https://nearhackathon.com/HACKATHON.md).  
+**leadName:** Diego Nicolas Lopez Del Bel (kept as instructed).
 
-## Baseline / disclosures (HACKATHON.md Q-002/Q-005)
+## What it is
+Hermes agents hold a **function-call access key** scoped to an on-chain **spend_cap** policy contract (`pay` only, 0 deposit). The human keeps full access. Caps + optional allowlist are enforced **on-chain**; the JS guard still blocks bad counterparties before signing.
 
-- Patterns inspired by `TheNeuralWars/goalchain-agentpay` (HashKey) — **that repo is not modified**.
-- Hermes fleet spend-gate ideas; UI tokens from GoalWorld cinematic demos.
-- Libraries: `near-api-js`, Node 20+ fetch; AI planner via OmniRoute `free-smart` (local).
-- AI-written code: most of this pack (disclosed).
+## Accounts (testnet)
+| Role | Account |
+| --- | --- |
+| Agent (FC key) | `gwagent894bd1e3.testnet` |
+| Policy contract | `policy.gwagent894bd1e3.testnet` |
+| Vendor payee (≠ agent) | `gwvendor4a20f8.testnet` |
 
-## Do X → see Y (machine reader)
+Evidence: `evidence/policy-contract.json`, `evidence/pay-good.json` (real tx hash), `evidence/pay-llm.json`.
 
+## Quick start
 ```bash
-npm install
-npm test
-npm run setup:testnet    # free faucet account + FC key → ~/.near-credentials/testnet (600)
-set -a; source evidence/testnet.env; set +a
-export OMNI_API_KEY=…    # hermes-fleet / OmniRoute key via vault-run — never commit
-npm start                # http://127.0.0.1:3091
+npm ci
+npm test                 # 17/17
+npm run demo             # ATTACK BLOCKED · CAP BLOCKED · QUOTE dry 1Click
+npm start                # http://127.0.0.1:3191
 ```
 
-| Do | See |
+Live on-chain pay (uses `~/.near-credentials/testnet/*.fc.json`):
+```bash
+set -a; . evidence/testnet.env; set +a
+NEAR_LIVE_CHAIN=1 npm run demo
+```
+
+## LLM evidence (judge-reproducible)
+Any OpenAI-compatible endpoint — **not** tied to VPS localhost:
+```bash
+LLM_BASE_URL=https://api.openai.com/v1 \
+LLM_API_KEY=sk-... \
+LLM_MODEL=gpt-4o-mini \
+node scripts/llm_guard_demo.js
+```
+Saved transcripts: `evidence/llm-plan-good.json` (valid vendor payee), `evidence/llm-plan-attack.json` + `evidence/pay-llm.json` (model emits `scam.near` 4.5 → guard **BLOCKED**).
+
+## Do X → see Y
+| Call | Expected |
 | --- | --- |
-| `GET /api/health` | `network:testnet`, `agent_account`, FC key `can_transfer_near:false` |
-| `POST /api/pay` `{"payee":"wrap.near","amount_near":0.2}` | Counterparty `view_account` + dry 1Click price (or `no price`) + receipt |
-| `POST /api/pay` `{"payee":"scam.near","amount_near":1}` | `BLOCKED` / `counterparty_block` |
-| `POST /api/pay` `{"amount_near":3,"payee":"wrap.near"}` | `BLOCKED` / `per_tx_cap` |
-| `POST /api/pay` `{"demo":"attack"}` | LLM (if key) or direct block on `scam.near` |
-| `POST /api/quote` `{}` | Real `dry:true` 1Click quote fields — never fabricated |
-| evidence/testnet-account.json | explorer account + addKey tx; FC Transfer refused |
+| `POST /api/pay` vendor 0.12 with `NEAR_LIVE_CHAIN=1` | `PASS` + `receipt.tx_hash` on testnet explorer |
+| `POST /api/pay` `scam.near` | `BLOCKED` / `counterparty_block` |
+| `POST /api/pay` amount 3 | `BLOCKED` / `per_tx_cap` |
+| `POST /api/pay` `{"demo":"attack"}` + LLM key | LLM plans `scam.near` → guard **BLOCKED** |
+| Dry 1Click | `evidence/quote-dry.json` — mainnet quote, `dry:true`, no spend |
 
-## Honesty
-
-- Testnet RPC + real AddKey / FC key. **No mainnet.**
-- 1Click quotes are `dry:true` only; if API fails → **no price** (never invent).
-- Mainnet payout field for submit form: `MAINNET_PAYOUT_NEAR=` placeholder in SUBMIT_DRAFT (Nico fills later).
+## Baseline / AI disclosure
+Reuses GoalWorld AgentPay / Hermes human-gate patterns. Contract: Rust `near-sdk` 5 (`contracts/spend_cap`). Some glue/docs drafted with AI; on-chain txs and RPC checks are real.
 
 ## License
-
 MIT.

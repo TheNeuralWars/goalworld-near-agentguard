@@ -1,28 +1,23 @@
-# NEAR HACKATHON — STATUS
+# STATUS — NEAR AgentGuard
 
-**REVIEW: pending** · October re-review target ≤ 13 Nov Rome  
-**Build target:** 12 Nov 18:00 Rome · **Deadline submit:** 15 Nov 00:59 Rome
+**REVIEW: pending** · Hermes RR1 pass (2026-11-09 19:01 UTC). On-chain spend_cap deployed; real FC pay tx; LLM attack blocked; payout id filled. Video still interim (caption cards with full URLs — need live UI screen capture for October).
 
-## Changelog vs October `changes_requested`
-
-| Item | Fix | Evidence |
+## Done
+| Item | Status | Evidence |
 | --- | --- | --- |
-| P0-a Real testnet | `near-api-js` setup: faucet account + FC AddKey + Transfer refusal | `scripts/setup_testnet.js`, `evidence/testnet-account.json` |
-| P0-a On-chain payee | `view_account` / access keys via RPC | `lib/near_rpc.js`, `lib/counterparty.js` |
-| P0-b 1Click dry | Real `POST 1click…/v0/quote` dry:true; else no price | `lib/intents.js`, `test/intents.test.js` |
-| P0-c LLM | OmniRoute `free-smart` structured plan; policy still in code | `lib/llm.js`, `/api/pay` `{task}` |
-| P1 prior=2 hole | `priorInteractions` default **null** (never 2) | `server.js`, agent tests |
-| P1 reason codes | `token_allowlist` / `per_tx_cap` / `daily_cap` | `lib/policy.js` |
-| P1 README | disclosures + do X→see Y | `README.md` |
-| Payout | Placeholder only — Nico mainnet `.near` later | `SUBMIT_DRAFT.md` `MAINNET_PAYOUT_NEAR` |
+| Vault `near-mainnet-payout` | ✅ | inbox shredded |
+| SUBMIT_DRAFT nearAddress | ✅ `b87adc…7df9` implicit | form allows named OR 64-hex (nearhackathon.com/HACKATHON.md) |
+| spend_cap contract testnet | ✅ `policy.gwagent894bd1e3.testnet` | evidence/policy-contract.json |
+| FC key scoped to `pay` | ✅ AddKey `4tj1DRne…` | same |
+| Real PASS pay tx | ✅ `9CQuUD8S…` → vendor `gwvendor4a20f8.testnet` | evidence/pay-good.json |
+| Over-cap on-chain | ✅ blocked | policy-contract.json over_cap |
+| Transfer with FC | ✅ refused | same |
+| LLM good + attack | ✅ vendor 0.11 / scam.near 4.5 → BLOCKED | evidence/llm-plan-*.json, pay-llm.json |
+| Judge LLM CLI | ✅ `scripts/llm_guard_demo.js` | README |
+| Dry 1Click | ✅ recaptured | evidence/quote-dry.json |
+| README network split | ✅ | README.md |
+| npm test | ✅ 17/17 | |
 
-## Needs from Nico
-
-1. Mainnet `.near` payout (form) — later; leave placeholder.
-2. OK public repo after October approved.
-3. OK X demo post + video host.
-4. Confirm exact submit JSON (`leadName` Diego Nicolas Lopez Del Bel kept).
-
-## Hard limits
-
-testnet free OK (Nico confirmed) · no mainnet · no submit · no public · no X · AgentPay untouched
+## Still open
+1. Re-record **live UI** screen capture (current media/ is interim caption cards with full explorer URLs — not a typed Run Guard session).
+2. Nico OK: public repo, X post, exact submit JSON.

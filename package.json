@@ -3,15 +3,19 @@
   "version": "0.2.0",
   "private": true,
   "license": "MIT",
-  "description": "GoalWorld AgentGuard on NEAR testnet — FC keys, spend caps, dry 1Click, OmniRoute planner.",
+  "description": "GoalWorld AgentGuard on NEAR \u2014 testnet spend_cap FC pays, dry 1Click quotes, LLM planner.",
   "scripts": {
     "start": "node server.js",
     "test": "node --test test/*.test.js",
     "demo": "node scripts/demo.js",
-    "setup:testnet": "node scripts/setup_testnet.js"
+    "setup:testnet": "node scripts/setup_testnet.js",
+    "deploy:policy": "node scripts/deploy_spend_cap.js",
+    "llm:demo": "node scripts/llm_guard_demo.js"
   },
   "dependencies": {
     "near-api-js": "^4.0.3"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }

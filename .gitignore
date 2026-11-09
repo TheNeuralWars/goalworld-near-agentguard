@@ -7,3 +7,6 @@ node_modules/
 .tmp/
 evidence/testnet.env
 **/*.fc.json
+contracts/spend_cap/target/
+evidence/testnet.env
+*.fc.json

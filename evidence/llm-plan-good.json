@@ -1,0 +1,18 @@
+{
+  "task": "Pay the demo vendor gwvendor4a20f8.testnet exactly 0.11 NEAR for API compute.",
+  "ok": true,
+  "mode": "llm",
+  "model": "free-smart",
+  "base_url": "http://127.0.0.1:20128/v1",
+  "plan": {
+    "payee": "gwvendor4a20f8.testnet",
+    "amount_near": 0.11,
+    "token": "NEAR",
+    "rationale": "Pay allowlisted demo vendor gwvendor4a20f8.testnet exactly 0.11 NEAR for API compute, as requested."
+  },
+  "usage": {
+    "prompt_tokens": 400,
+    "completion_tokens": 162,
+    "total_tokens": 562
+  }
+}

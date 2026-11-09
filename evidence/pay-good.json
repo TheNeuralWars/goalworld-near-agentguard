@@ -2,15 +2,18 @@
   "verdict": "PASS",
   "reason": "ok",
   "receipt": {
-    "id": "guard-1794248693723",
-    "status": "policy_pass_no_price",
-    "amount_near": 0.2,
+    "id": "guard-1794250533990",
+    "status": "onchain_pay",
+    "amount_near": 0.12,
     "token": "NEAR",
-    "payee": "gwagent894bd1e3.testnet",
+    "payee": "gwvendor4a20f8.testnet",
+    "tx_hash": "9CQuUD8Sm2JXcNH5TqVE3UWbK9RTQyVLg9cnwoXVdEzr",
+    "explorer": "https://testnet.nearblocks.io/txns/9CQuUD8Sm2JXcNH5TqVE3UWbK9RTQyVLg9cnwoXVdEzr",
+    "policy_account": "policy.gwagent894bd1e3.testnet",
     "quote": null,
     "price": null,
-    "ts": "2026-11-09T18:24:53.723Z",
-    "note": "No mainnet exec. Dry 1Click quote only when ok."
+    "ts": "2026-11-09T18:55:33.990Z",
+    "note": "Real testnet FunctionCall pay() signed with FC key. 1Click quotes remain dry:true mainnet."
   },
   "counterparty": {
     "decision": "allow",
@@ -22,22 +25,22 @@
     ],
     "onchain": {
       "ok": true,
-      "account_id": "gwagent894bd1e3.testnet",
-      "amount": "9999957928787285800000000",
+      "account_id": "gwvendor4a20f8.testnet",
+      "amount": "10150000000000000000000000",
       "locked": "0",
-      "storage_usage": 348,
+      "storage_usage": 182,
       "code_hash": "11111111111111111111111111111111",
-      "block_height": 276956548,
+      "block_height": 276959650,
       "exists": true
     },
-    "account_id": "gwagent894bd1e3.testnet"
+    "account_id": "gwvendor4a20f8.testnet"
   },
   "spend": {
     "ok": true,
     "decision": "allow",
     "reason": "within caps",
     "code": "ok",
-    "remaining": 5
+    "remaining": 2
   },
   "quote": {
     "ok": false,
@@ -48,22 +51,20 @@
     "price": null,
     "raw": {
       "message": "Internal server error",
-      "correlationId": "0bceee54-529c-410f-8946-c9ebce1ed8c3",
-      "timestamp": "2026-11-09T18:24:53.676Z",
+      "correlationId": "b440c49e-075c-4f66-bdac-feceb681e276",
+      "timestamp": "2026-11-09T18:55:21.404Z",
       "path": "/v0/quote"
     }
   },
   "key": {
     "type": "function_call",
     "account_id": "gwagent894bd1e3.testnet",
-    "receiver_id": "wrap.near",
+    "receiver_id": "policy.gwagent894bd1e3.testnet",
     "method_names": [
-      "ft_transfer",
-      "storage_deposit",
-      "near_deposit"
+      "pay"
     ],
     "can_transfer_near": false,
-    "public_key": "ed25519:2hPfLZTYfwCVBidoKdMAtihvZ1SEfpF1XS5EF85VMfcT",
+    "public_key": "ed25519:6NScEWPke2rsrm6SE72vTdUojnKdu4Y8dNTjVax5uNux",
     "notes": [
       "FC key scoped to one receiver + method allowlist.",
       "Cannot Transfer native NEAR or AddKey — proven on testnet in evidence/.",
@@ -72,25 +73,28 @@
   },
   "budget": {
     "day": "2026-11-09",
-    "per_tx_near": 1,
-    "daily_near": 5,
-    "spent_near": 0.2,
-    "remaining_near": 4.8,
+    "per_tx_near": 0.5,
+    "daily_near": 2,
+    "spent_near": 0.12,
+    "remaining_near": 1.88,
     "allow_tokens": [
       "NEAR",
       "USDC"
     ],
     "receipts": [
       {
-        "id": "guard-1794248693723",
-        "status": "policy_pass_no_price",
-        "amount_near": 0.2,
+        "id": "guard-1794250533990",
+        "status": "onchain_pay",
+        "amount_near": 0.12,
         "token": "NEAR",
-        "payee": "gwagent894bd1e3.testnet",
+        "payee": "gwvendor4a20f8.testnet",
+        "tx_hash": "9CQuUD8Sm2JXcNH5TqVE3UWbK9RTQyVLg9cnwoXVdEzr",
+        "explorer": "https://testnet.nearblocks.io/txns/9CQuUD8Sm2JXcNH5TqVE3UWbK9RTQyVLg9cnwoXVdEzr",
+        "policy_account": "policy.gwagent894bd1e3.testnet",
         "quote": null,
         "price": null,
-        "ts": "2026-11-09T18:24:53.723Z",
-        "note": "No mainnet exec. Dry 1Click quote only when ok."
+        "ts": "2026-11-09T18:55:33.990Z",
+        "note": "Real testnet FunctionCall pay() signed with FC key. 1Click quotes remain dry:true mainnet."
       }
     ]
   },
@@ -99,7 +103,7 @@
       "step": 1,
       "kind": "counterparty",
       "status": "allow",
-      "detail": "gwagent894bd1e3.testnet score=70",
+      "detail": "gwvendor4a20f8.testnet score=70",
       "reasons": [
         "view_account ok",
         "nonzero balance",
@@ -107,8 +111,8 @@
       ],
       "onchain": {
         "exists": true,
-        "amount": "9999957928787285800000000",
-        "block_height": 276956548
+        "amount": "10150000000000000000000000",
+        "block_height": 276959650
       }
     },
     {
@@ -122,7 +126,7 @@
       "step": 3,
       "kind": "fc_key",
       "status": "ok",
-      "detail": "scoped to wrap.near"
+      "detail": "scoped to policy.gwagent894bd1e3.testnet"
     },
     {
       "step": 4,
@@ -132,11 +136,18 @@
     },
     {
       "step": 5,
+      "kind": "onchain_pay",
+      "status": "ok",
+      "detail": "tx 9CQuUD8Sm2JXcNH5TqVE3UWbK9RTQyVLg9cnwoXVdEzr",
+      "explorer": "https://testnet.nearblocks.io/txns/9CQuUD8Sm2JXcNH5TqVE3UWbK9RTQyVLg9cnwoXVdEzr"
+    },
+    {
+      "step": 6,
       "kind": "receipt",
-      "status": "policy_pass_no_price",
-      "detail": "guard-1794248693723"
+      "status": "onchain_pay",
+      "detail": "9CQuUD8Sm2JXcNH5TqVE3UWbK9RTQyVLg9cnwoXVdEzr"
     }
   ],
-  "ms": 3538,
-  "honesty": "Testnet RPC + dry 1Click when available — no mainnet tx, no fabricated prices"
+  "ms": 17213,
+  "honesty": "Testnet on-chain pay via spend_cap + dry 1Click mainnet quotes — no mainnet spend"
 }

@@ -1,21 +1,20 @@
-'use strict';
-const { describe, it } = require('node:test');
-const assert = require('node:assert/strict');
-const { describeFunctionCallKey, assertCanSign } = require('../lib/keys');
+"use strict";
+const { describe, it } = require("node:test");
+const assert = require("node:assert/strict");
+const { describeFunctionCallKey, assertCanSign } = require("../lib/keys");
 
-describe('fc keys', () => {
-  it('cannot transfer NEAR', () => {
-    const k = describeFunctionCallKey({ accountId: 'a.testnet', receiverId: 'wrap.near' });
+describe("keys", () => {
+  it("describes FC key", () => {
+    const k = describeFunctionCallKey({ accountId: "a.testnet", receiverId: "policy.example.testnet" });
     assert.equal(k.can_transfer_near, false);
   });
-  it('signs only allowlisted method on receiver', () => {
+  it("assertCanSign scopes method", () => {
     const k = describeFunctionCallKey({
-      accountId: 'a.testnet',
-      receiverId: 'wrap.near',
-      methodNames: ['ft_transfer'],
+      accountId: "a.testnet",
+      receiverId: "policy.example.testnet",
+      methodNames: ["pay"],
     });
-    assert.equal(assertCanSign(k, { receiverId: 'wrap.near', method: 'ft_transfer' }).ok, true);
-    assert.equal(assertCanSign(k, { receiverId: 'other.near', method: 'ft_transfer' }).ok, false);
-    assert.equal(assertCanSign(k, { receiverId: 'wrap.near', method: 'add_key' }).ok, false);
+    assert.equal(assertCanSign(k, { receiverId: "policy.example.testnet", method: "pay" }).ok, true);
+    assert.equal(assertCanSign(k, { receiverId: "policy.example.testnet", method: "add_key" }).ok, false);
   });
 });

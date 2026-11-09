@@ -1,0 +1,40 @@
+{
+  "network": "testnet",
+  "agent_account": "gwagent894bd1e3.testnet",
+  "policy_account": "policy.gwagent894bd1e3.testnet",
+  "vendor_account": "gwvendor4a20f8.testnet",
+  "wasm_bytes": 137281,
+  "create_hash": "8VpwPrsNEAn3JxHaup1sC6p6WQFqCwjmbeAMTzw2wjhF",
+  "deploy_hash": "3JwDYVPNqLBGNqowk3KUkBRt6hSEevYzWgFfG2vTf8Uz",
+  "init_hash": "AQ315SMeHLxHM9QwLjwhbTBEMopxXYWVP8Y2TBE4ip18",
+  "deposit_hash": "3RQowviha4tVRQjCycVvtpUVy42sWHCnaZD8xTwBHvH8",
+  "fc_public_key": "ed25519:6NScEWPke2rsrm6SE72vTdUojnKdu4Y8dNTjVax5uNux",
+  "fc_receiver": "policy.gwagent894bd1e3.testnet",
+  "fc_methods": [
+    "pay"
+  ],
+  "add_key_hash": "4tj1DRne8x5oygVhS2KG6zT8RunFPF9TuyJGQLVJW5GE",
+  "explorer_policy": "https://testnet.nearblocks.io/address/policy.gwagent894bd1e3.testnet",
+  "explorer_add_key": "https://testnet.nearblocks.io/txns/4tj1DRne8x5oygVhS2KG6zT8RunFPF9TuyJGQLVJW5GE",
+  "explorer_pay": "https://testnet.nearblocks.io/txns/EVHWvNfzEdNWxW3dmXrPCT8Ase5Z9vegzAcuKP9337FS",
+  "transfer_with_fc_key": {
+    "refused": true,
+    "error": "The transaction contains more then one action, but it was signed with an access key which allows transaction to apply only one specific action. To apply more then one actions TX must be signed with a full access key"
+  },
+  "pay_tx": {
+    "ok": true,
+    "hash": "EVHWvNfzEdNWxW3dmXrPCT8Ase5Z9vegzAcuKP9337FS",
+    "payee": "gwvendor4a20f8.testnet",
+    "amount_near": 0.15
+  },
+  "over_cap": {
+    "blocked_onchain": true,
+    "hash": null,
+    "error": "{\"index\":0,\"kind\":{\"index\":0,\"kind\":{\"FunctionCallError\":{\"ExecutionError\":\"WebAssembly trap: An `unreachable` opcode was executed.\"}}}}"
+  },
+  "caps": {
+    "per_tx_near": 0.5,
+    "daily_near": 2
+  },
+  "created_at": "2026-11-09T18:52:34.490Z"
+}

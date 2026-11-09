@@ -15,23 +15,23 @@
     "recipientType": "INTENTS",
     "refundTo": "demo.near",
     "refundType": "ORIGIN_CHAIN",
-    "deadline": "2026-11-09T18:34:58.948Z"
+    "deadline": "2026-11-09T19:05:52.696Z"
   },
   "quote": {
     "amountIn": "1000000000000000000000000",
     "amountInFormatted": "1.0",
-    "amountInUsd": "3.570000000000",
-    "amountOut": "3562170",
-    "amountOutFormatted": "3.56217",
-    "amountOutUsd": "3.559363010040",
-    "minAmountOut": "3526548",
+    "amountInUsd": "3.610000000000",
+    "amountOut": "3611280",
+    "amountOutFormatted": "3.61128",
+    "amountOutUsd": "3.608181521760",
+    "minAmountOut": "3575167",
     "timeEstimate": 20
   },
   "price": {
     "in": "1.0 (nep141:wrap.near)",
-    "out": "3.56217 (nep141:usdt.tether-token.near)",
-    "inUsd": "3.570000000000",
-    "outUsd": "3.559363010040"
+    "out": "3.61128 (nep141:usdt.tether-token.near)",
+    "inUsd": "3.610000000000",
+    "outUsd": "3.608181521760"
   },
   "note": "dry:true — no deposit address, no funds moved"
 }
