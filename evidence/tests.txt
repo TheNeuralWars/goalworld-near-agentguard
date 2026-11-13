@@ -1,0 +1,151 @@
+
+> goalworld-near-agentguard@0.2.0 test
+> node --test test/*.test.js
+
+TAP version 13
+# Subtest: agent
+    # Subtest: blocks blocklisted payee
+    ok 1 - blocks blocklisted payee
+      ---
+      duration_ms: 2.124283
+      type: 'test'
+      ...
+    # Subtest: blocks overspend with per_tx code
+    ok 2 - blocks overspend with per_tx code
+      ---
+      duration_ms: 6274.668437
+      type: 'test'
+      ...
+    # Subtest: warn path needs human
+    ok 3 - warn path needs human
+      ---
+      duration_ms: 6129.044199
+      type: 'test'
+      ...
+    # Subtest: does not default prior interactions to 2
+    ok 4 - does not default prior interactions to 2
+      ---
+      duration_ms: 6135.478317
+      type: 'test'
+      ...
+    1..4
+ok 1 - agent
+  ---
+  duration_ms: 18543.690039
+  type: 'suite'
+  ...
+# Subtest: 1Click dry quote
+    # Subtest: returns real dry quote or explicit no price — never fabricates 1:1
+    ok 1 - returns real dry quote or explicit no price — never fabricates 1:1
+      ---
+      duration_ms: 544.277188
+      type: 'test'
+      ...
+    # Subtest: noPrice helper has null price
+    ok 2 - noPrice helper has null price
+      ---
+      duration_ms: 0.34032
+      type: 'test'
+      ...
+    1..2
+ok 2 - 1Click dry quote
+  ---
+  duration_ms: 545.94607
+  type: 'suite'
+  ...
+# Subtest: keys
+    # Subtest: describes FC key
+    ok 1 - describes FC key
+      ---
+      duration_ms: 2.132043
+      type: 'test'
+      ...
+    # Subtest: assertCanSign scopes method
+    ok 2 - assertCanSign scopes method
+      ---
+      duration_ms: 0.328081
+      type: 'test'
+      ...
+    1..2
+ok 3 - keys
+  ---
+  duration_ms: 4.505926
+  type: 'suite'
+  ...
+# Subtest: spend policy
+    # Subtest: allows under caps
+    ok 1 - allows under caps
+      ---
+      duration_ms: 1.753922
+      type: 'test'
+      ...
+    # Subtest: blocks over per-tx with code
+    ok 2 - blocks over per-tx with code
+      ---
+      duration_ms: 0.21952
+      type: 'test'
+      ...
+    # Subtest: token allowlist code
+    ok 3 - token allowlist code
+      ---
+      duration_ms: 0.444321
+      type: 'test'
+      ...
+    # Subtest: daily cap
+    ok 4 - daily cap
+      ---
+      duration_ms: 0.26828
+      type: 'test'
+      ...
+    # Subtest: warn near ceiling
+    ok 5 - warn near ceiling
+      ---
+      duration_ms: 0.277361
+      type: 'test'
+      ...
+    1..5
+ok 4 - spend policy
+  ---
+  duration_ms: 4.457406
+  type: 'suite'
+  ...
+# Subtest: server
+    # Subtest: health
+    ok 1 - health
+      ---
+      duration_ms: 48.012942
+      type: 'test'
+      ...
+    # Subtest: pay attack
+    ok 2 - pay attack
+      ---
+      duration_ms: 12.267696
+      type: 'test'
+      ...
+    # Subtest: malformed json → 400
+    ok 3 - malformed json → 400
+      ---
+      duration_ms: 5.357927
+      type: 'test'
+      ...
+    # Subtest: ui
+    ok 4 - ui
+      ---
+      duration_ms: 5.078766
+      type: 'test'
+      ...
+    1..4
+ok 5 - server
+  ---
+  duration_ms: 71.774934
+  type: 'suite'
+  ...
+1..5
+# tests 17
+# suites 5
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 18739.986535

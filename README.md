@@ -17,6 +17,12 @@ Hermes agents hold a **function-call access key** scoped to an on-chain **spend_
 
 Evidence: `evidence/policy-contract.json`, `evidence/pay-good.json` (real tx hash), `evidence/pay-llm.json`.
 
+## Demo video
+Live 1080p screen capture of the running UI (captions only): `media/near_agentguard_demo_live_20261113_v4.mp4` (2:15).
+- ALLOW `PASS`: https://testnet.near.rocks/tx/BoDcriGQuWR2gM2dciSGibDA3LAj2S4KH4CeN4WwhYXa
+- ATTACK `scam.near` prompt injection: blocked before signing (no tx)
+- OVER-CAP 0.7 NEAR > 0.5 NEAR per-tx: reverted on-chain by `spend_cap`: https://testnet.near.rocks/tx/89dpvqVp5ntrmEDQggWfmf28twR4fwga6UHF12dLscLt
+
 ## Quick start
 ```bash
 npm ci

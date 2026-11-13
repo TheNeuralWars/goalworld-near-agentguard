@@ -10,3 +10,8 @@ evidence/testnet.env
 contracts/spend_cap/target/
 evidence/testnet.env
 *.fc.json
+media/record-raw/
+
+# rejected / superseded demo takes (kept on disk)
+media/*REJECTED*.mp4
+media/near_agentguard_demo_live_20261113.mp4

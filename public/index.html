@@ -8,6 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .verdict.PASS{color:#3ddc97}
+    .verdict.BLOCK{color:#ff5d73}
+    .explorer-url{display:block;font:600 15px var(--mono);color:#7ad7ff;word-break:break-all;line-height:1.45;padding:12px 14px;border:1px solid rgba(122,215,255,.35);border-radius:10px;background:rgba(10,20,40,.7)}
+    .t-url{font:12px var(--mono);color:#7ad7ff;margin-top:4px;word-break:break-all}
+    #caption-bar{position:fixed;left:24px;right:24px;bottom:18px;z-index:50;padding:14px 18px;border-radius:12px;background:rgba(0,0,0,.78);border:1px solid rgba(255,255,255,.18);font:600 20px "Chakra Petch",sans-serif;color:#f4f7ff;letter-spacing:.02em;pointer-events:none}
+    #agent-line{font:13px var(--mono);color:var(--mute);margin-top:6px}
+  </style>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -17,6 +25,7 @@
       <div>
         <div class="brand-name">AgentGuard</div>
         <div class="brand-sub">GoalWorld · NEAR agents + security</div>
+        <div id="agent-line">loading…</div>
       </div>
     </div>
     <div class="badges">
@@ -28,33 +37,37 @@
     <section class="hero">
       <p class="kicker">NEAR HACKATHON · tracks agents + security</p>
       <h1>Give agents money without the <em>keys to everything</em></h1>
-      <p class="lede">Hermes agents spend under human policy: <strong>function-call keys</strong>, spend caps, counterparty checks, then a <strong>dry NEAR Intents</strong> quote. Full-access stays with the human.</p>
+      <p class="lede">Hermes agents spend under human policy: <strong>function-call keys</strong> scoped to an on-chain <strong>spend_cap</strong> contract, counterparty checks, then a real testnet <code>pay()</code>. Full-access stays with the human. 1Click quotes stay <strong>mainnet dry:true</strong>.</p>
     </section>
     <section class="console">
       <div class="demos">
         <button class="demo demo-good" data-demo="good" type="button">
           <span class="demo-tag">01 · ALLOW</span>
-          <span class="demo-title">Dry Intent pay</span>
-          <span class="demo-desc">FC key → quote → mock settle</span>
+          <span class="demo-title">Vendor pay (on-chain)</span>
+          <span class="demo-desc">FC → spend_cap.pay → explorer</span>
         </button>
         <button class="demo demo-bad" data-demo="cap" type="button">
           <span class="demo-tag">02 · CAP</span>
-          <span class="demo-title">Over daily/per-tx</span>
-          <span class="demo-desc">Policy blocks before signing</span>
+          <span class="demo-title">Over per-tx on-chain</span>
+          <span class="demo-desc">0.7 NEAR &gt; 0.5 cap → blocked</span>
         </button>
         <button class="demo demo-escape" data-demo="attack" type="button">
           <span class="demo-tag">03 · ATTACK</span>
           <span class="demo-title">Pay scam.near</span>
-          <span class="demo-desc">Injected agent stopped cold</span>
+          <span class="demo-desc">LLM inject → guard BLOCKED</span>
         </button>
       </div>
       <label class="label" for="payee">Payee</label>
-      <textarea id="payee" rows="1" style="min-height:48px">intents.near</textarea>
+      <textarea id="payee" rows="1" style="min-height:48px">gwvendor4a20f8.testnet</textarea>
       <label class="label" for="amount" style="margin-top:12px">Amount (NEAR)</label>
-      <textarea id="amount" rows="1" style="min-height:48px">0.25</textarea>
+      <textarea id="amount" rows="1" style="min-height:48px">0.12</textarea>
       <div class="run-row">
-        <span class="hint">TESTNET · dry 1Click · FC keys · payout mainnet <code>.near</code> later (Nico)</span>
+        <span class="hint">TESTNET live chain · dry 1Click mainnet · payout form uses 64-hex implicit</span>
         <button class="run" id="run" type="button">Run guard</button>
+      </div>
+      <div id="pending-row" class="pending-row" hidden>
+        <span class="pending-spinner" aria-hidden="true"></span>
+        <span id="pending-text">Awaiting NEAR testnet transaction confirmation...</span>
       </div>
     </section>
     <section class="results" id="results" hidden>
@@ -73,12 +86,37 @@
           <div id="budget-panel"></div>
         </div>
       </div>
+      <div class="panel" id="explorer-panel" hidden></div>
       <div class="panel"><h2>Timeline</h2><ul class="timeline" id="timeline"></ul></div>
+    </section>
+    <section class="panel" id="layers-summary" style="margin-top:24px">
+      <h2>3-Layer Defense-in-Depth Architecture</h2>
+      <div class="demos" style="margin-top:12px">
+        <div class="demo" style="cursor:default">
+          <span class="demo-tag">LAYER 1 · CRYPTOGRAPHIC KEY SCOPE</span>
+          <span class="demo-title">Function-Call Key Only</span>
+          <span class="demo-desc">Agent <code>gwagent894bd1e3.testnet</code> holds FC key scoped to <code>policy.gwagent894bd1e3.testnet</code> (<code>pay</code> only, 0 deposit, <code>can_transfer_near: false</code>).</span>
+        </div>
+        <div class="demo" style="cursor:default">
+          <span class="demo-tag">LAYER 2 · PRE-SIGN FIREWALL</span>
+          <span class="demo-title">Counterparty &amp; Injection Guard</span>
+          <span class="demo-desc">Blocks prompt-injection &amp; untrusted payees (<code>scam.near</code>) via RPC account verification &amp; threat rules before signing.</span>
+        </div>
+        <div class="demo" style="cursor:default">
+          <span class="demo-tag">LAYER 3 · ON-CHAIN SPEND_CAP WASM</span>
+          <span class="demo-title">Smart Contract Policy Vault</span>
+          <span class="demo-desc">Enforces <code>0.5 NEAR</code> per-tx cap, <code>2 NEAR</code> daily cap &amp; vendor allowlist on-chain in <code>policy.gwagent894bd1e3.testnet</code>.</span>
+        </div>
+      </div>
     </section>
   </main>
   <footer>
-    <p>NEAR HACKATHON · tracks <code>agents</code> + <code>security</code> · patterns inspired by GoalChain AgentPay (untouched) · no wallet / mainnet in this pack</p>
+    <p>NEAR HACKATHON · tracks <code>agents</code> + <code>security</code> · on-chain spend_cap · no secrets on screen</p>
   </footer>
+  <div id="caption-bar">AgentGuard demo · ready</div>
   <script src="/app.js"></script>
+  <script>
+    window.setCaption = (t) => { const el = document.getElementById('caption-bar'); if (el) el.textContent = t; };
+  </script>
 </body>
 </html>

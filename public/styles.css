@@ -98,3 +98,6 @@ textarea:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba
 .budget-row:last-child{border-bottom:0}
 .bar{height:8px;border-radius:99px;background:#0c0e16;margin:12px 0 4px;overflow:hidden}
 .bar > i{display:block;height:100%;background:linear-gradient(90deg,#3F00FF,#7b5cff)}
+.pending-row{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 16px;border-radius:10px;background:rgba(63,0,255,.12);border:1px solid rgba(123,92,255,.35);font:600 13.5px var(--mono);color:#7ad7ff}
+.pending-spinner{width:16px;height:16px;border:2px solid rgba(122,215,255,.3);border-top-color:#7ad7ff;border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}

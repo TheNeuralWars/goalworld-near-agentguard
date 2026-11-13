@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const { SpendPolicy } = require('./lib/policy');
 const { describeFunctionCallKey } = require('./lib/keys');
-const { runPayment, runAgentTask, attackDemo } = require('./lib/agent');
+const { runPayment, runAgentTask, attackDemo, syncPolicyFromChain } = require('./lib/agent');
 const { checkCounterparty } = require('./lib/counterparty');
 const { quoteIntent } = require('./lib/intents');
 
@@ -16,14 +16,15 @@ const publicDir = path.join(__dirname, 'public');
 const policy = new SpendPolicy({
   perTxNear: Number(process.env.PER_TX_NEAR || 1),
   dailyNear: Number(process.env.DAILY_SPEND_NEAR || 5),
+  // JS per-tx 1.0 lets 0.7 reach on-chain spend_cap (0.5) for demo
 });
 
 function loadKey() {
   return describeFunctionCallKey({
     accountId: process.env.NEAR_AGENT_ACCOUNT || 'unconfigured',
-    receiverId: process.env.NEAR_FC_RECEIVER || 'wrap.near',
+    receiverId: process.env.NEAR_FC_RECEIVER || process.env.NEAR_POLICY_ACCOUNT || 'wrap.testnet',
     publicKey: process.env.NEAR_FC_PUBLIC_KEY || null,
-    methodNames: ['ft_transfer', 'storage_deposit', 'near_deposit'],
+    methodNames: (process.env.NEAR_FC_METHODS || 'pay').split(',').map((s) => s.trim()).filter(Boolean),
   });
 }
 
@@ -62,6 +63,7 @@ async function handler(req, res) {
   const p = url.pathname.replace(/\/$/, '') || '/';
 
   if (req.method === 'GET' && (p === '/api/health' || p === '/health')) {
+    await syncPolicyFromChain(policy);
     const key = loadKey();
     return send(res, 200, {
       ok: true,
@@ -72,6 +74,7 @@ async function handler(req, res) {
       agent_account: process.env.NEAR_AGENT_ACCOUNT || null,
       tracks: ['agents', 'security'],
       budget: policy.snapshot(),
+      onchain_policy: policy.onchain || null,
       key: {
         type: key.type,
         account_id: key.account_id,
@@ -81,12 +84,17 @@ async function handler(req, res) {
         public_key: key.public_key,
       },
       omni: Boolean(process.env.OMNI_API_KEY),
+      live_chain: process.env.NEAR_LIVE_CHAIN === '1',
+      policy_account: process.env.NEAR_POLICY_ACCOUNT || process.env.NEAR_FC_RECEIVER || null,
       honesty: 'Testnet + dry 1Click — no mainnet; no fabricated prices',
       hackathon: 'NEAR HACKATHON 2026',
     });
   }
 
-  if (req.method === 'GET' && p === '/api/budget') return send(res, 200, policy.snapshot());
+  if (req.method === 'GET' && p === '/api/budget') {
+    await syncPolicyFromChain(policy);
+    return send(res, 200, policy.snapshot());
+  }
   if (req.method === 'GET' && p === '/api/key') return send(res, 200, loadKey());
 
   if (req.method === 'POST' && p === '/api/counterparty') {
@@ -128,7 +136,7 @@ async function handler(req, res) {
             policy,
             key,
             task: body.task,
-            apiKey: process.env.OMNI_API_KEY,
+            apiKey: process.env.OMNI_API_KEY || process.env.LLM_API_KEY,
           })
         );
       }
